@@ -1,0 +1,27 @@
+language: c
+
+os: "linux"
+dist: "trusty"
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - libqt4-dev
+
+install:
+  - sudo mkdir /tmp/install
+  - tar xvf sip-4.18.1.tar.gz
+  - cd sip-4.18.1
+  - python3 configure.py
+  - make
+  - sudo make install
+  - sudo make install DESTDIR=/tmp/install
+  - cd ..
+  - tar xvf PyQt-x11-gpl-4.11.4.tar.gz
+  - cd PyQt-x11-gpl-4.11.4/
+  - export PATH=$PATH:/tmp/install/usr/bin
+  - python3 configure-ng.py --confirm-license
+  - make
+  - sudo make install DESTDIR=/tmp/install
+  - gem install fpm
