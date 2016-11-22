@@ -21,7 +21,7 @@ install:
   - tar xvf PyQt-x11-gpl-4.11.4.tar.gz
   - cd PyQt-x11-gpl-4.11.4/
   - export PATH=$PATH:/tmp/install/usr/bin
-  - python3 configure-ng.py --confirm-license
+  - python3 configure-ng.py --confirm-license -b /tmp/install/usr/bin/ -d /tmp/install/usr/lib/python3/dist-packages/ -v /tmp/install/share/sip/PyQt4
   - make
-  - sudo make install DESTDIR=/tmp/install
+  - sudo make install
   - gem install fpm
