@@ -17,11 +17,24 @@ install:
   - make
   - sudo make install
   - sudo make install DESTDIR=/tmp/install
-  - cd ..
-  - tar xvf PyQt-x11-gpl-4.11.4.tar.gz
-  - cd PyQt-x11-gpl-4.11.4/
-  - export PATH=$PATH:/tmp/install/usr/bin
-  - python3 configure-ng.py --confirm-license -b /tmp/install/usr/bin/ -d /tmp/install/usr/lib/python3/dist-packages/ -v /tmp/install/share/sip/PyQt4
-  - make
-  - sudo make install
+    #  - cd ..
+    #  - tar xvf PyQt-x11-gpl-4.11.4.tar.gz
+    #  - cd PyQt-x11-gpl-4.11.4/
+    #  - export PATH=$PATH:/tmp/install/usr/bin
+    #  - python3 configure-ng.py --confirm-license -b /tmp/install/usr/bin/ -d /tmp/install/usr/lib/python3/dist-packages/ -v /tmp/install/share/sip/PyQt4
+    #  - make
+    #  - sudo make install
   - gem install fpm
+
+script:
+  - fpm -s dir -t deb -n pyqt4-faf -v 4.11.4 -C /tmp/install -p pyqt4-faf_4.11.4_travis.deb
+  - ls -al
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: cYt4nJFVuaPOGJI6Pq/dBklwUXARxKU9jBlxA8dIExVdMB53pTZ90omUtOcgnbDuF2XxRCHco8hhK5O2+YllWVo5UuWq06qvrK9mxwURSYztbks4XxyDY5VhzWKeVclMYwNn0THc9Y2Skvx9C7MtoARFaQL9nyzt5ftV2BGOf2svLQdBeqIdAdag5Ki23gZ7WDT/2lsuetqU3yHW1KJ3d1gtTNgbwP+/QAwTxUwdqDmdMehlQH69tpD5sn+ZiYXUqFxyDxJIsnaMK++dsYewZrDSncYsWUrN6VHgE6RUjsd7lvZluHy3lCop5+m8VOZ7CKvYl19PowPPJpJheg+WxEGBahf/0EPxUprl/KtVy9jM6Trci40gCkWehOqfF1wFvGBT+u7juutQmOAYYxamLBOxpWYYZsvQQAIMdEJ5lRmluLfzrriDHP/jX3L0kx3dhFHMffBB18nAapaWD8IEQWP6SyQLWAW9/Ta3cq2rMMSRf8bbgkGrpOgCE8xEzSiMcI3rI+u+UOE8v7+/zRvIyMg5FvnuF8ij2z4D7Z86WUR9Zs9CXItGfQqdlHSMXAvFacK7bd0KUxYyXbdbjzVMIGkaUbKnhJOUbYNk1TpnuIYW5+neBxtTZOZcpu6U72WuhcrCLPuh+y5yEEaI0nKGBJ7fZTdyrOJvLePmmE4SQWM=
+  file: pyqt4-faf_4.11.4_travis.deb
+  on:
+    branch: master
