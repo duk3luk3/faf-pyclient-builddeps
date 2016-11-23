@@ -14,6 +14,7 @@ install:
   - tar xvf sip-4.18.1.tar.gz
   - cd sip-4.18.1
   - python3 configure.py
+  - pip3 install virtualenv
   - make
   - sudo make install
   - sudo make install DESTDIR=/tmp/install
