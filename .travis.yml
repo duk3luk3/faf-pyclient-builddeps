@@ -11,6 +11,9 @@ addons:
 
 install:
   - sudo mkdir /tmp/install
+  - which pip
+  - which pip3
+  - sudo /opt/python/3.5.0/bin/pip3 install --install-option="--prefix=/tmp/install" virtualenv
   - tar xvf sip-4.18.1.tar.gz
   - cd sip-4.18.1
   - python3 configure.py
