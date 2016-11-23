@@ -11,6 +11,9 @@ addons:
 
 install:
   - sudo mkdir /tmp/install
+  - which pip
+  - which pip3
+  - sudo /opt/python/3.5.0/bin/pip3 install --install-option="--prefix=/tmp/install/opt/python/3.5.0" virtualenv
   - tar xvf sip-4.18.1.tar.gz
   - cd sip-4.18.1
   - python3 configure.py
@@ -28,7 +31,7 @@ install:
 
 script:
   - fpm -s dir -t deb -n pyqt4-faf -v 4.11.4 -C /tmp/install -p pyqt4-faf_4.11.4_travis.deb
-  - ls -al
+  - dpkg -c pyqt4-faf_4.11.4_travis.deb
 
 deploy:
   skip_cleanup: true
